@@ -49,23 +49,23 @@ export default function Achievements() {
           <div className="divider" aria-hidden="true" />
         </ScrollReveal>
 
-        <Stagger className="grid md:grid-cols-3 gap-6" gap={0.1}>
+        <Stagger className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6" gap={0.1}>
           {achievements.map((a) => (
             <StaggerItem key={a.id}>
               <article
-                className="card group p-6 flex flex-col justify-between h-full hover:border-[--accent]/40 transition-all duration-300"
+                className="card group p-5 sm:p-6 flex flex-col justify-between h-full hover:border-[--accent]/40 transition-all duration-300"
                 aria-label={a.title}
               >
                 <div>
-                  <div className="flex items-center justify-between gap-3 mb-5">
-                    <div className="p-3 rounded-xl bg-[rgba(34,211,238,0.08)] border border-[rgba(34,211,238,0.18)] text-[--accent] group-hover:scale-110 transition-transform duration-200">
+                  <div className="flex items-center justify-between gap-3 mb-4 sm:mb-5">
+                    <div className="p-2.5 sm:p-3 rounded-xl bg-[rgba(34,211,238,0.08)] border border-[rgba(34,211,238,0.18)] text-[--accent] group-hover:scale-110 transition-transform duration-200 shrink-0">
                       {ICON_MAP[a.icon] || ICON_MAP.trophy}
                     </div>
-                    <span className="mono text-xs font-semibold px-2.5 py-1 rounded-full bg-[--accent]/10 border border-[--accent]/25 text-[--accent]">
+                    <span className="mono text-xs font-semibold px-2.5 py-1 rounded-full bg-[--accent]/10 border border-[--accent]/25 text-[--accent] shrink-0 text-center">
                       {a.metric}
                     </span>
                   </div>
-                  <h3 className="text-lg font-bold mb-2 group-hover:text-[--accent] transition-colors" style={{ color: "var(--text)" }}>
+                  <h3 className="text-base sm:text-lg font-bold mb-2 group-hover:text-[--accent] transition-colors" style={{ color: "var(--text)" }}>
                     {a.title}
                   </h3>
                   <p className="text-sm leading-relaxed" style={{ color: "var(--text-muted)" }}>

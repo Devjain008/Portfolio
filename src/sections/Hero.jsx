@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { useTheme } from "../hooks/useTheme";
 import { useData }  from "../hooks/useData";
 import { GithubIcon, LinkedinIcon, MailIcon, LeetcodeIcon, ExternalLinkIcon, CodeforcesIcon } from "../components/Icons";
 
@@ -20,7 +19,6 @@ const FADE = (delay) => ({
 });
 
 export default function Hero() {
-  const { isDark } = useTheme();
   const { personal } = useData();
 
   const scrollTo = (id) =>
@@ -38,9 +36,7 @@ export default function Hero() {
     <section
       id="hero"
       aria-label="Hero introduction"
-      className={`relative min-h-screen flex flex-col justify-center hero-grid ${
-        isDark ? "" : "bg-gradient-to-b from-slate-50 to-white"
-      }`}
+      className="relative min-h-screen flex flex-col justify-center hero-grid overflow-hidden"
     >
       {/* Decorative blobs */}
       <div className="blob w-[480px] h-[480px] bg-cyan-400/20 -top-32 -left-32 opacity-[0.12]" aria-hidden="true" />
@@ -57,31 +53,31 @@ export default function Hero() {
           {/* Name */}
           <motion.h1
             {...FADE(0.15)}
-            className="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-none mb-4"
+            className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-tight sm:leading-none mb-3 sm:mb-4"
             style={{ color: "var(--text)" }}
           >
             {personal.name}<span className="text-[--accent]">.</span>
           </motion.h1>
 
           {/* Title */}
-          <motion.p {...FADE(0.25)} className="mono text-[--accent] text-sm sm:text-base font-medium mb-5 tracking-wide">
+          <motion.p {...FADE(0.25)} className="mono text-[--accent] text-xs sm:text-sm md:text-base font-medium mb-4 sm:mb-5 tracking-wide">
             &gt;&nbsp;{personal.title}
           </motion.p>
 
           {/* Pitch */}
           <motion.p
             {...FADE(0.35)}
-            className="text-base sm:text-lg leading-relaxed mb-9 max-w-xl"
+            className="text-sm sm:text-base md:text-lg leading-relaxed mb-7 sm:mb-9 max-w-xl"
             style={{ color: "var(--text-muted)" }}
           >
             {personal.pitch}
           </motion.p>
 
           {/* CTAs */}
-          <motion.div {...FADE(0.45)} className="flex flex-wrap gap-3 mb-11">
+          <motion.div {...FADE(0.45)} className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 mb-8 sm:mb-11 w-full sm:w-auto">
             <button
               onClick={() => scrollTo("projects")}
-              className="btn btn-primary"
+              className="btn btn-primary justify-center w-full sm:w-auto"
               aria-label="View my projects"
             >
               <ExternalLinkIcon size={15} />
@@ -90,7 +86,7 @@ export default function Hero() {
             <a
               href={personal.resume}
               download
-              className="btn btn-outline"
+              className="btn btn-outline justify-center w-full sm:w-auto"
               aria-label="Download my resume PDF"
             >
               <DownloadIcon />
@@ -98,7 +94,7 @@ export default function Hero() {
             </a>
             <button
               onClick={() => scrollTo("contact")}
-              className="btn btn-ghost"
+              className="btn btn-ghost justify-center w-full sm:w-auto"
               aria-label="Go to contact section"
             >
               <MailIcon size={15} />
@@ -118,12 +114,7 @@ export default function Hero() {
                   rel={href.startsWith("mailto") ? undefined : "noopener noreferrer"}
                   aria-label={label}
                   role="listitem"
-                  className={`p-2 rounded-lg border transition-all duration-200 hover:-translate-y-0.5
-                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--accent] ${
-                    isDark
-                      ? "border-[--border] text-slate-400 hover:text-[--accent] hover:border-[rgba(34,211,238,0.35)] hover:bg-[rgba(34,211,238,0.05)]"
-                      : "border-slate-200 text-slate-500 hover:text-cyan-600 hover:border-cyan-200 hover:bg-cyan-50"
-                  }`}
+                  className="p-2 rounded-lg border transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--accent] border-[--border] text-slate-400 hover:text-[--accent] hover:border-[rgba(34,211,238,0.35)] hover:bg-[rgba(34,211,238,0.05)]"
                 >
                   <Icon size={18} />
                 </a>

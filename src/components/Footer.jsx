@@ -1,9 +1,7 @@
-import { useTheme } from "../hooks/useTheme";
 import { useData }  from "../hooks/useData";
 import { GithubIcon, LinkedinIcon, MailIcon, LeetcodeIcon, CodeforcesIcon } from "./Icons";
 
 export default function Footer() {
-  const { isDark } = useTheme();
   const { personal } = useData();
 
   const socials = [
@@ -19,7 +17,7 @@ export default function Footer() {
   return (
     <footer
       role="contentinfo"
-      className={`border-t py-10 ${isDark ? "border-[--border] bg-[--bg]" : "border-slate-200 bg-white"}`}
+      className="border-t py-8 sm:py-10 border-[--border] bg-[--bg]"
     >
       <div className="container">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
@@ -47,9 +45,7 @@ export default function Footer() {
                 rel={href.startsWith("mailto") ? undefined : "noopener noreferrer"}
                 aria-label={label}
                 role="listitem"
-                className={`p-2 rounded-md transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--accent] ${
-                  isDark ? "text-slate-500 hover:text-[--accent]" : "text-slate-400 hover:text-cyan-600"
-                }`}
+                className="p-2 rounded-md transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--accent] text-slate-500 hover:text-[--accent]"
               >
                 <Icon size={16} />
               </a>
@@ -60,9 +56,7 @@ export default function Footer() {
           <button
             onClick={scrollTop}
             aria-label="Back to top of page"
-            className={`flex items-center gap-1.5 mono text-xs transition-all hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--accent] rounded ${
-              isDark ? "text-slate-500 hover:text-[--accent]" : "text-slate-400 hover:text-cyan-600"
-            }`}
+            className="flex items-center gap-1.5 mono text-xs transition-all hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--accent] rounded text-slate-500 hover:text-[--accent]"
           >
             back to top
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true">

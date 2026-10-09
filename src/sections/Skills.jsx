@@ -1,16 +1,14 @@
-import { useTheme } from "../hooks/useTheme";
 import { useData }  from "../hooks/useData";
 import { ScrollReveal, Stagger, StaggerItem } from "../components/ScrollReveal";
 
 export default function Skills() {
-  const { isDark }  = useTheme();
-  const { skills }  = useData();
+  const { skills } = useData();
 
   return (
     <section
       id="skills"
       aria-label="Skills and technologies"
-      className={`section ${isDark ? "bg-[--bg-card2]" : "bg-white"}`}
+      className="section bg-[--bg-card2]"
     >
       <div className="container">
         <ScrollReveal preset="fadeUp" className="flex items-center gap-5 mb-12">
@@ -21,11 +19,11 @@ export default function Skills() {
           <div className="divider" aria-hidden="true" />
         </ScrollReveal>
 
-        <Stagger className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5" gap={0.07}>
+        <Stagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5" gap={0.07}>
           {skills.map((group) => (
             <StaggerItem key={group.id}>
               <article
-                className="card p-5 h-full"
+                className="card p-4 sm:p-5 h-full"
                 aria-label={`${group.category} skills`}
               >
                 <div className="flex items-center gap-2.5 mb-4">

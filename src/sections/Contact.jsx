@@ -1,6 +1,5 @@
 import { useState, useRef } from "react";
 import emailjs from "@emailjs/browser";
-import { useTheme } from "../hooks/useTheme";
 import { useData }  from "../hooks/useData";
 import { GithubIcon, LinkedinIcon, MailIcon, LeetcodeIcon, CodeforcesIcon } from "../components/Icons";
 import { ScrollReveal } from "../components/ScrollReveal";
@@ -18,7 +17,6 @@ function validate({ name, email, message }) {
 }
 
 export default function Contact() {
-  const { isDark }          = useTheme();
   const { personal, emailjsConfig } = useData();
 
   const formRef = useRef(null);
@@ -65,7 +63,7 @@ export default function Contact() {
     <section
       id="contact"
       aria-label="Contact Dev Jain"
-      className={`section ${isDark ? "" : "bg-slate-50/60"}`}
+      className="section"
     >
       <div className="container">
         <ScrollReveal preset="fadeUp" className="flex items-center gap-5 mb-12">
@@ -76,17 +74,17 @@ export default function Contact() {
           <div className="divider" aria-hidden="true" />
         </ScrollReveal>
 
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Info */}
           <ScrollReveal preset="fadeLeft">
-            <p className="text-base leading-relaxed mb-8" style={{ color: "var(--text-muted)" }}>
+            <p className="text-sm sm:text-base leading-relaxed mb-6 sm:mb-8" style={{ color: "var(--text-muted)" }}>
               I'm open to internship opportunities, freelance collaborations, and good conversations about software engineering and DSA. Feel free to reach out!
             </p>
 
-            <div className="space-y-4 mb-8">
+            <div className="space-y-4 mb-6 sm:mb-8">
               <a
                 href={`mailto:${personal.email}`}
-                className="flex items-center gap-3 text-sm w-fit transition-colors hover:text-[--accent] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--accent] rounded"
+                className="flex items-center gap-3 text-sm w-fit transition-colors hover:text-[--accent] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--accent] rounded break-all"
                 style={{ color: "var(--text-muted)" }}
               >
                 <MailIcon size={15} className="text-[--accent] shrink-0" />
@@ -101,7 +99,7 @@ export default function Contact() {
             </div>
 
             <p className="mono text-xs mb-3" style={{ color: "var(--text-dimmed)" }}>find me on</p>
-            <div className="flex gap-3" role="list" aria-label="Social links">
+            <div className="flex flex-wrap gap-2.5 sm:gap-3" role="list" aria-label="Social links">
               {socials.map(({ href, Icon, label }) => (
                 <a
                   key={label}
@@ -110,12 +108,7 @@ export default function Contact() {
                   rel={href.startsWith("mailto") ? undefined : "noopener noreferrer"}
                   aria-label={label}
                   role="listitem"
-                  className={`p-2.5 rounded-lg border transition-all duration-200 hover:-translate-y-0.5
-                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--accent] ${
-                    isDark
-                      ? "border-[--border] text-slate-400 hover:text-[--accent] hover:border-[rgba(34,211,238,0.35)] hover:bg-[rgba(34,211,238,0.05)]"
-                      : "border-slate-200 text-slate-500 hover:text-cyan-600 hover:bg-cyan-50"
-                  }`}
+                  className="p-2.5 rounded-lg border transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--accent] border-[--border] text-slate-400 hover:text-[--accent] hover:border-[rgba(34,211,238,0.35)] hover:bg-[rgba(34,211,238,0.05)]"
                 >
                   <Icon size={18} />
                 </a>
@@ -123,11 +116,11 @@ export default function Contact() {
             </div>
 
             {/* Mailto fallback */}
-            <p className="mt-8 text-sm" style={{ color: "var(--text-dimmed)" }}>
+            <p className="mt-6 sm:mt-8 text-sm" style={{ color: "var(--text-dimmed)" }}>
               Prefer email directly?{" "}
               <a
                 href={`mailto:${personal.email}`}
-                className="text-[--accent] underline hover:no-underline"
+                className="text-[--accent] underline hover:no-underline break-all"
               >
                 {personal.email}
               </a>
@@ -136,7 +129,7 @@ export default function Contact() {
 
           {/* Form */}
           <ScrollReveal preset="fadeRight" delay={0.1}>
-            <div className="card p-6">
+            <div className="card p-5 sm:p-6">
               {status === "success" ? (
                 <div className="flex flex-col items-center justify-center gap-4 py-12 text-center">
                   <div className="w-14 h-14 rounded-full flex items-center justify-center bg-[rgba(34,211,238,0.1)] border border-[rgba(34,211,238,0.3)]">

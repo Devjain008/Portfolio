@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useTheme } from "../hooks/useTheme";
 import { useData }  from "../hooks/useData";
 
 // Inline icons to avoid import overhead in the nav chunk
@@ -22,7 +21,6 @@ function XIcon() {
   );
 }
 export default function Navbar() {
-  const { isDark } = useTheme();
   const data = useData();
   const navLinks = data.navLinks;
 
@@ -61,17 +59,13 @@ export default function Navbar() {
   };
 
   const bg = scrolled
-    ? isDark
-      ? "bg-[#0a0f1e]/90 backdrop-blur-md border-b border-[#1e293b] shadow-lg shadow-black/20"
-      : "bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm"
+    ? "bg-[#0a0f1e]/90 backdrop-blur-md border-b border-[#1e293b] shadow-lg shadow-black/20"
     : "bg-transparent";
 
   const linkBase =
     "px-3 py-1.5 rounded-md text-sm font-medium mono transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--accent]";
   const linkActive   = "text-[--accent] bg-[rgba(34,211,238,0.08)]";
-  const linkInactive = isDark
-    ? "text-slate-400 hover:text-white hover:bg-white/5"
-    : "text-slate-500 hover:text-slate-900 hover:bg-slate-100";
+  const linkInactive = "text-slate-400 hover:text-white hover:bg-white/5";
 
   return (
     <header role="banner" className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${bg}`}>
@@ -122,7 +116,7 @@ export default function Navbar() {
             <a
               href={data.personal.resume}
               download
-              className="hidden sm:inline-flex btn btn-outline text-xs py-1 px-3"
+              className="!hidden sm:!inline-flex btn btn-outline text-xs py-1 px-3"
               aria-label="Download resume PDF"
             >
               Resume
@@ -134,7 +128,7 @@ export default function Navbar() {
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
             aria-controls="mobile-menu"
-            className="md:hidden p-2 rounded-lg transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--accent] text-slate-400 hover:text-white hover:bg-white/5"
+            className="md:hidden p-2 rounded-lg transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--accent] text-slate-400 hover:text-white hover:bg-white/5 shrink-0"
           >
             {open ? <XIcon /> : <MenuIcon />}
           </button>
@@ -152,11 +146,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.18 }}
-            className={`md:hidden border-t ${
-              isDark
-                ? "bg-[#0a0f1e]/95 backdrop-blur-md border-[#1e293b]"
-                : "bg-white/95 backdrop-blur-md border-slate-200"
-            }`}
+            className="md:hidden border-t bg-[#0a0f1e]/95 backdrop-blur-md border-[#1e293b]"
           >
             <ul className="flex flex-col px-4 py-3 gap-1" role="list">
               {navLinks.map(({ label, href }) => {

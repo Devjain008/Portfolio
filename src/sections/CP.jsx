@@ -1,4 +1,3 @@
-import { useTheme } from "../hooks/useTheme";
 import { useData }  from "../hooks/useData";
 import { ExternalLinkIcon } from "../components/Icons";
 import { ScrollReveal, Stagger, StaggerItem } from "../components/ScrollReveal";
@@ -25,7 +24,7 @@ function CFIcon({ size = 28 }) {
 function Badge({ label, color }) {
   return (
     <span
-      className="inline-flex items-center gap-1.5 mono text-xs font-semibold px-3 py-1 rounded-full"
+      className="inline-flex items-center gap-1.5 mono text-xs font-semibold px-2.5 sm:px-3 py-1 rounded-full shrink-0"
       style={{
         background: `${color}15`,
         border: `1px solid ${color}40`,
@@ -40,18 +39,15 @@ function Badge({ label, color }) {
 
 // ── Stat block ────────────────────────────────────────────────
 function Stat({ value, label, color }) {
-  const { isDark } = useTheme();
   return (
-    <div className={`flex flex-col items-center justify-center py-5 px-4 rounded-xl ${
-      isDark ? "bg-white/4" : "bg-slate-50 border border-slate-100"
-    }`}>
+    <div className="flex flex-col items-center justify-center py-3.5 sm:py-5 px-1.5 sm:px-4 rounded-xl bg-white/4 border border-white/5 text-center min-w-0">
       <span
-        className="text-3xl font-extrabold tracking-tight mb-1"
+        className="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight mb-0.5 sm:mb-1 truncate max-w-full"
         style={{ color }}
       >
         {value}
       </span>
-      <span className="mono text-xs" style={{ color: "var(--text-dimmed)" }}>
+      <span className="mono text-[10px] sm:text-xs truncate max-w-full" style={{ color: "var(--text-dimmed)" }}>
         {label}
       </span>
     </div>
@@ -62,32 +58,34 @@ function Stat({ value, label, color }) {
 function PlatformCard({ platform, handle, badge, badgeColor, accentColor, icon: Icon, statsList, profileUrl, highlights }) {
   return (
     <article
-      className="card p-6 flex flex-col gap-6 h-full"
+      className="card p-5 sm:p-6 flex flex-col gap-5 sm:gap-6 h-full"
       aria-label={`${platform} competitive programming stats`}
     >
       {/* Platform header */}
-      <div className="flex items-start justify-between gap-3">
-        <div className="flex items-center gap-3">
+      <div className="flex items-center justify-between gap-3 flex-wrap">
+        <div className="flex items-center gap-3 min-w-0">
           <div
-            className="p-2.5 rounded-xl shrink-0"
+            className="p-2 sm:p-2.5 rounded-xl shrink-0"
             style={{ background: `${accentColor}14`, border: `1px solid ${accentColor}30`, color: accentColor }}
           >
-            <Icon size={26} />
+            <Icon size={24} />
           </div>
-          <div>
-            <h3 className="font-bold text-base" style={{ color: "var(--text)" }}>
+          <div className="min-w-0">
+            <h3 className="font-bold text-base truncate" style={{ color: "var(--text)" }}>
               {platform}
             </h3>
-            <p className="mono text-xs mt-0.5" style={{ color: "var(--text-dimmed)" }}>
+            <p className="mono text-xs mt-0.5 truncate" style={{ color: "var(--text-dimmed)" }}>
               @{handle}
             </p>
           </div>
         </div>
-        <Badge label={badge} color={badgeColor || accentColor} />
+        <div className="shrink-0">
+          <Badge label={badge} color={badgeColor || accentColor} />
+        </div>
       </div>
 
       {/* Stats row */}
-      <div className={`grid gap-3 ${statsList.length === 2 ? "grid-cols-2" : "grid-cols-3"}`}>
+      <div className={`grid gap-2 sm:gap-3 ${statsList.length === 2 ? "grid-cols-2" : "grid-cols-3"}`}>
         {statsList.map((s) => (
           <Stat key={s.label} value={s.value} label={s.label} color={s.color || accentColor} />
         ))}
@@ -119,7 +117,7 @@ function PlatformCard({ platform, handle, badge, badgeColor, accentColor, icon: 
         href={profileUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="btn btn-outline w-full justify-center"
+        className="btn btn-outline w-full justify-center text-sm py-2"
         style={{ borderColor: `${accentColor}60`, color: accentColor }}
         aria-label={`Open ${platform} profile`}
       >
@@ -132,7 +130,6 @@ function PlatformCard({ platform, handle, badge, badgeColor, accentColor, icon: 
 
 // ── Section ───────────────────────────────────────────────────
 export default function CP() {
-  const { isDark } = useTheme();
   const { cp }     = useData();
   const { leetcode, codeforces } = cp;
 
@@ -140,7 +137,7 @@ export default function CP() {
     <section
       id="cp"
       aria-label="Competitive programming"
-      className={`section ${isDark ? "bg-[--bg-card2]" : "bg-white"}`}
+      className="section bg-[--bg-card2]"
     >
       <div className="container">
         {/* Header */}
@@ -152,7 +149,7 @@ export default function CP() {
           <div className="divider" aria-hidden="true" />
         </ScrollReveal>
 
-        <Stagger className="grid lg:grid-cols-2 gap-6" gap={0.1}>
+        <Stagger className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6" gap={0.1}>
           {/* LeetCode */}
           <StaggerItem preset="fadeLeft">
             <PlatformCard

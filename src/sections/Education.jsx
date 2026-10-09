@@ -1,16 +1,14 @@
-import { useTheme } from "../hooks/useTheme";
 import { useData }  from "../hooks/useData";
 import { ScrollReveal, Stagger, StaggerItem } from "../components/ScrollReveal";
 
 export default function Education() {
-  const { isDark }          = useTheme();
   const { education, coursework } = useData();
 
   return (
     <section
       id="education"
       aria-label="Education history"
-      className={`section ${isDark ? "" : "bg-slate-50/60"}`}
+      className="section"
     >
       <div className="container">
         <ScrollReveal preset="fadeUp" className="flex items-center gap-5 mb-12">
@@ -21,23 +19,21 @@ export default function Education() {
           <div className="divider" aria-hidden="true" />
         </ScrollReveal>
 
-        <div className="grid lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10">
           {/* Timeline */}
           <div className="lg:col-span-2">
-            <ol className="relative pl-10" aria-label="Education timeline">
+            <ol className="relative pl-8 sm:pl-10" aria-label="Education timeline">
               <div className="timeline-bar" aria-hidden="true" />
               <Stagger staggerDelay={0.12}>
-                {education.map((edu, i) => (
+                {education.map((edu) => (
                   <StaggerItem key={edu.id}>
-                    <li className="relative pb-10 last:pb-0">
+                    <li className="relative pb-8 sm:pb-10 last:pb-0">
                       {/* Dot */}
                       <div
-                        className={`absolute -left-[2.55rem] top-1 w-5 h-5 rounded-full border-2 flex items-center justify-center z-10 ${
+                        className={`absolute -left-[2.1rem] sm:-left-[2.55rem] top-1 w-5 h-5 rounded-full border-2 flex items-center justify-center z-10 ${
                           edu.status === "ongoing"
                             ? "border-[--accent] bg-[rgba(34,211,238,0.15)]"
-                            : isDark
-                            ? "border-[--border] bg-[--bg]"
-                            : "border-slate-300 bg-white"
+                            : "border-[--border] bg-[--bg]"
                         }`}
                         aria-hidden="true"
                       >
@@ -51,8 +47,8 @@ export default function Education() {
                       </div>
 
                       {/* Card */}
-                      <article className="card p-5 ml-3 hover:border-[rgba(34,211,238,0.2)]">
-                        <div className="flex flex-wrap items-start justify-between gap-2">
+                      <article className="card p-4 sm:p-5 ml-2 sm:ml-3 hover:border-[rgba(34,211,238,0.2)]">
+                        <div className="flex flex-wrap items-start justify-between gap-2.5">
                           <div>
                             <h3 className="font-bold text-base" style={{ color: "var(--text)" }}>
                               {edu.degree}
@@ -64,14 +60,12 @@ export default function Education() {
                               {edu.location}
                             </p>
                           </div>
-                          <div className="text-right shrink-0">
+                          <div className="text-left sm:text-right shrink-0">
                             <span
                               className={`mono text-xs px-2 py-0.5 rounded-full ${
                                 edu.status === "ongoing"
                                   ? "bg-[rgba(34,211,238,0.08)] text-[--accent] border border-[rgba(34,211,238,0.25)]"
-                                  : isDark
-                                  ? "bg-white/5 text-[--text-dimmed] border border-[--border]"
-                                  : "bg-slate-100 text-slate-400 border border-slate-200"
+                                  : "bg-white/5 text-[--text-dimmed] border border-[--border]"
                               }`}
                             >
                               {edu.period}

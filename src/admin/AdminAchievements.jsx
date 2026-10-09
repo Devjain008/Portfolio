@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { getKey, setKey, uid } from "./adminHelpers";
-import { useTheme } from "../hooks/useTheme";
 
 const ICONS = ["trophy", "award", "code", "zap"];
 const BLANK = () => ({
